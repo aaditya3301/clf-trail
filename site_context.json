@@ -1,0 +1,153 @@
+{
+  "site": {
+    "name": "AI Sales Dashboard Pro",
+    "base_url": "https://ai-sales-dashboard-pro.vercel.app",
+    "description": "An AI-powered sales dashboard for managing leads, conversations, campaigns, and voice calls.",
+    "tech_stack": "Next.js (React), dark theme UI with CSS variables"
+  },
+  "navigation": {
+    "sidebar": {
+      "description": "Left sidebar with main navigation links. Always visible.",
+      "items": [
+        { "label": "Dashboard", "path": "/", "description": "Overview with stats cards, leads by status, pipeline table" },
+        { "label": "Leads", "path": "/leads", "description": "Leads table with filtering, manual add, CSV upload, outreach actions" },
+        { "label": "Conversations", "path": "/conversations", "description": "Email conversations with leads, AI-generated replies" },
+        { "label": "Voice Calls", "path": "/voice-calls", "description": "Voice call management for converted customers" },
+        { "label": "Campaigns", "path": "/campaigns", "description": "Email campaign management — create, preview, send" },
+        { "label": "Settings", "path": "/settings", "description": "AI system prompt and scoring rules configuration" }
+      ]
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "path": "/",
+      "description": "Main dashboard with stat cards and pipeline activity table",
+      "readable_data": [
+        "Total Leads count",
+        "Conversations count",
+        "Customers count",
+        "Dropped count",
+        "Conversion Rate percentage",
+        "Average Lead Score",
+        "Leads by Status breakdown",
+        "Conversations by Status breakdown",
+        "Recent Pipeline Activity table (lead name, email, score, status, message count)"
+      ]
+    },
+    "leads": {
+      "path": "/leads",
+      "description": "Leads management page with table of all leads",
+      "actions": {
+        "add_manually": {
+          "description": "Opens a modal to add a single lead manually",
+          "trigger": "Click the '+ Add Manually' button in the top-right area",
+          "modal": {
+            "title": "Add Lead Manually",
+            "fields": [
+              { "label": "Email *", "type": "email", "required": true, "key": "email" },
+              { "label": "Name", "type": "text", "required": false, "key": "name" },
+              { "label": "Phone", "type": "text", "required": false, "key": "phone" },
+              { "label": "Company", "type": "text", "required": false, "key": "company" },
+              { "label": "Job Title", "type": "text", "required": false, "key": "job_title" }
+            ],
+            "submit_button": "Add Lead",
+            "cancel_button": "Cancel",
+            "close_button": "✕ button in top-right of modal",
+            "success_indicator": "Alert dialog saying 'Lead added successfully! It is now in the pipeline.'",
+            "post_submit_behavior": "Shows browser alert, then modal closes and leads table refreshes"
+          }
+        },
+        "upload_csv": {
+          "description": "Upload a CSV file to bulk-import leads",
+          "trigger": "Click the 'Upload CSV' button"
+        },
+        "filter_by_status": {
+          "description": "Filter leads by status using dropdown",
+          "trigger": "Select from the 'All statuses' dropdown",
+          "options": ["new", "enriched", "contacted", "in_conversation", "converted", "dropped"]
+        },
+        "start_outreach": {
+          "description": "Start AI outreach for a single lead",
+          "trigger": "Click the 'Contact' button next to a lead row (only visible for 'enriched' or 'new' status leads)",
+          "confirmation": "Browser confirm dialog asking 'Start outreach for {email}? An AI email will be sent.'"
+        },
+        "contact_all": {
+          "description": "Start outreach for all enriched leads at once",
+          "trigger": "Click 'Contact All (N)' button (only visible when enriched leads exist)",
+          "confirmation": "Browser confirm dialog"
+        }
+      },
+      "table_columns": ["Name / Email", "Company", "Title", "Score", "Status", "Source", "Created", "Action"]
+    },
+    "conversations": {
+      "path": "/conversations",
+      "description": "View and manage email conversations with leads",
+      "actions": {
+        "view_conversation": {
+          "description": "Click on a conversation row to see message thread",
+          "trigger": "Click any conversation in the list"
+        },
+        "simulate_reply": {
+          "description": "Type a simulated customer reply to test AI response",
+          "trigger": "Type in the reply input field and click Send"
+        }
+      }
+    },
+    "campaigns": {
+      "path": "/campaigns",
+      "description": "Create and manage email campaigns",
+      "actions": {
+        "create_campaign": {
+          "description": "Create a new email campaign",
+          "trigger": "Click 'Create Campaign' button",
+          "form_fields": [
+            { "label": "Campaign Name", "type": "text", "required": true },
+            { "label": "Subject Line", "type": "text", "required": true },
+            { "label": "Email Body", "type": "textarea", "required": true },
+            { "label": "Audience", "type": "select", "options": ["all_leads", "enriched", "new", "contacted"] }
+          ]
+        },
+        "send_campaign": {
+          "description": "Send a created campaign",
+          "trigger": "Click 'Send' button on a draft campaign"
+        },
+        "delete_campaign": {
+          "description": "Delete a campaign",
+          "trigger": "Click 'Delete' button"
+        }
+      }
+    },
+    "voice_calls": {
+      "path": "/voice-calls",
+      "description": "Make AI-powered voice calls to converted customers",
+      "actions": {
+        "initiate_call": {
+          "description": "Start a voice call to a customer",
+          "trigger": "Click 'Call' button next to a customer"
+        },
+        "direct_call": {
+          "description": "Call any phone number directly",
+          "trigger": "Enter phone number and name, click 'Call'"
+        }
+      }
+    },
+    "settings": {
+      "path": "/settings",
+      "description": "Configure AI behavior and scoring rules",
+      "actions": {
+        "update_prompt": {
+          "description": "Change the AI system prompt",
+          "trigger": "Edit the text area and click 'Save Prompt'"
+        },
+        "reset_prompt": {
+          "description": "Reset prompt to default",
+          "trigger": "Click 'Reset to Default'"
+        },
+        "update_rules": {
+          "description": "Update scoring rules (seniority keywords, industries, thresholds)",
+          "trigger": "Modify the fields and click 'Save Rules'"
+        }
+      }
+    }
+  }
+}
