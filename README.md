@@ -1,8 +1,8 @@
-# 🤖 CLF-Bro — Autonomous AI Sales Agent
+#  CLF-Bro — Autonomous AI Sales Agent
 
 CLF-Bro is a next-generation **autonomous browser agent** built on Cloudflare's edge. It transforms natural language instructions into complex web interactions without any hard-coded selectors or fragile automation scripts.
 
-## ✨ Key Features
+##  Key Features
 
 - **Autonomous Thinking**: Uses **Workers AI (Llama 3.3 70B)** to plan multi-step browser workflows from natural language prompts.
 - **AI-Powered Browser**: Powered by **Stagehand**, enabling the agent to "see" and "understand" web pages via the accessibility tree.
@@ -10,7 +10,7 @@ CLF-Bro is a next-generation **autonomous browser agent** built on Cloudflare's 
 - **Pure Cloudflare Stack**: Runs entirely on Cloudflare Workers, using Browser Rendering and Workers AI (no external API keys required!).
 - **Site Context Aware**: Uses a detailed `site_context.json` to navigate and interact with complex SPAs like a human would.
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Prerequisites
 - [Node.js](https://nodejs.org/) installed.
@@ -63,7 +63,7 @@ curl -X POST http://127.0.0.1:8787/agent \
   -d '{"prompt": "Go to the dashboard and tell me the total leads count and conversion rate"}'
 ```
 
-## 🏗️ Architecture
+##  Architecture
 
 1. **Request**: Receives a prompt and optional data.
 2. **Planner**: Workers AI (Llama) reads the `site_context.json` + prompt to create a step-by-step action plan.
@@ -71,12 +71,12 @@ curl -X POST http://127.0.0.1:8787/agent \
 4. **Browser Rendering**: Runs a real headless Chrome instance to interact with the target site.
 5. **Fallbacks**: If high-level extraction fails, the agent falls back to direct DOM text analysis to ensure a successful outcome.
 
-## 📁 Project Structure
+##  Project Structure
 
 - `src/index.ts`: The main entry point and agent logic.
 - `src/workersAIClient.ts`: Cloudflare Workers AI client for Stagehand.
 - `site_context.json`: Comprehensive configuration of the target site's layout and actions.
 - `wrangler.jsonc`: Cloudflare Worker configuration.
 
-## 📜 License
+##  License
 MIT
