@@ -17,9 +17,14 @@
 		"nodejs_compat"
 	],
 	"browser": {
-    	"binding": "MYBROWSER",
-		"remote": true
-  	}
+    	"binding": "MYBROWSER"
+  	},
+	"ai": {
+		"binding": "AI"
+	},
+	"alias": {
+		"playwright": "@cloudflare/playwright"
+	}
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
